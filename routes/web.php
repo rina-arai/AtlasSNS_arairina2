@@ -17,7 +17,7 @@
 // Route::get('/home', 'HomeController@index')->name('home');
 
 //Auth::routes();
-
+Route::get('/', 'HomeController@index');
 
 //ログアウト中のページ
 Route::get('/login', 'Auth\LoginController@login');
