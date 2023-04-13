@@ -24,14 +24,18 @@
         <div id = "head">
         <h1><a href="http://127.0.0.1:8000/top"><img src="images/logo.png"></a></h1>
             <div id="">
+                <details>
+                    <summary>
                 <div id="">
-                    <p>〇〇さん<summary><img src="images/arrow.png"></summary></p>
+                    <p>〇〇さん<img src="images/arrow.png"></p>
                 <div>
+                    </summary>
                 <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
+                    <li><a href="/top">HOME</a></li>
+                    <li><a href="/profile">プロフィール編集</a></li>
                     <li><a href="/logout">ログアウト</a></li>
                 </ul>
+</details>
             </div>
         </div>
     </header>
