@@ -22,10 +22,10 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href="http://127.0.0.1:8000/posts/index"><img src="images/logo.png"></a></h1>
+        <h1><a href="http://127.0.0.1:8000/top"><img src="images/logo.png"></a></h1>
             <div id="">
                 <div id="">
-                    <p>〇〇さん<img src="images/arrow.png"></p>
+                    <p>〇〇さん<summary><img src="images/arrow.png"></summary></p>
                 <div>
                 <ul>
                     <li><a href="/top">ホーム</a></li>
