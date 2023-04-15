@@ -1,6 +1,16 @@
 @extends('layouts.login')
 
 @section('content')
-<h2>機能を実装していきましょう。</h2>
+<!-- 投稿フォーム -->
+ <div class="container">
+  <img src="images/arrow.png">
+  <!-- フォーム開始タグと同義　urlがtopになっているページにフォーム -->
+        {!! Form::open(['url' => 'posts/create']) !!}
+        <div class="form-group">
+            {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form-control', 'placeholder' => '投稿内容を入力してください。']) !!}
+        </div>
+        <button type="submit" class="btn btn-success pull-right"><img src="/images/post.png"></button>
+        {!! Form::close() !!}
+    </div>
 
 @endsection
