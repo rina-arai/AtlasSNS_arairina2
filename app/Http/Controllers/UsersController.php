@@ -13,4 +13,22 @@ class UsersController extends Controller
     public function search(){
         return view('users.search');
     }
+
+// 検索
+public function searchForm(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $query = Post::query();
+
+        if(!empty($keyword)) {
+            $query->where('username', 'LIKE', "%{$keyword}%");
+        }
+
+        $posts = $query->get();
+
+        return view('users.search', compact('posts', 'keyword'));
+
+}
+
 }

@@ -4,6 +4,9 @@
 <!-- 投稿フォーム -->
  <div class="container">
   <img src="images/arrow.png">
+
+  <div class="container">
+    <!-- ユーザーアイコン入れる -->
   <!-- フォーム開始タグと同義　urlがtopになっているページにフォーム -->
         {!! Form::open(['url' => 'posts/create']) !!}
         <div class="form-group">
@@ -12,5 +15,5 @@
         <button type="submit" class="btn btn-success pull-right"><img src="/images/post.png"></button>
         {!! Form::close() !!}
     </div>
-
+</div>
 @endsection

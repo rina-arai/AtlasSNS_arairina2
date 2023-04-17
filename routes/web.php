@@ -36,6 +36,8 @@ Route::post('/posts/create','PostsController@create');
 Route::get('/profile','UsersController@profile');
 
 Route::get('/search','UsersController@search');
+Route::get('/search','UsersController@searchForm')
+    ->username('users.search');
 
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
