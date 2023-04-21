@@ -22,7 +22,7 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href="http://127.0.0.1:8000/top"><img src="images/logo.png"></a></h1>
+        <h1><a href="http://127.0.0.1:8000/posts/index"><img src="/images/atlas.png"></a></h1>
             <div id="">
                 <details>
                     <summary>

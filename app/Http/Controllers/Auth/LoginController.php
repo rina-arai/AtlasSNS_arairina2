@@ -34,10 +34,10 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
 
     public function login(Request $request){
         if($request->isMethod('post')){
@@ -46,7 +46,7 @@ class LoginController extends Controller
             // ログインが成功したら、トップページへ
             //↓ログイン条件は公開時には消すこと
             if(Auth::attempt($data)){
-                return redirect('/top');
+                return redirect('/posts/index');
             }
         }
         return view("auth.login");

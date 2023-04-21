@@ -175,9 +175,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // フォームファサード機能の実装　どのライブラリを使うか
-        Collective\Html\HtmlServiceProvider::class,
-
     ],
 
     /*
@@ -228,10 +225,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-        // フォームファサード機能の実装　どのライブラリを使うか
-        'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

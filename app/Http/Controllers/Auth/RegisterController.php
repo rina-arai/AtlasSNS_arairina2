@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 
 class RegisterController extends Controller
 {
@@ -46,14 +47,16 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
-    }
+
+    // protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'username' => 'required|string|between:2,12',
+    //         'mail' => 'required|string|email|between:5,40|unique:users',
+    //         // password_confirmedという項目(confirmed)
+    //         'password' => 'required|string|alpha_num|between:8,20|confirmed',
+    //     ]);
+    // }
 
     /**
      * Create a new user instance after a valid registration.
@@ -61,6 +64,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+    // 登録のメソッド
     protected function create(array $data)
     {
         return User::create([
@@ -75,16 +79,27 @@ class RegisterController extends Controller
     //     return view("auth.register");
     // }
 
-    public function register(Request $request){
-        if($request->isMethod('post')){
+    // public function register(Request $request){
+    //     if($request->isMethod('post')){
+    //         $data = $request->input();
+
+    //         $this->create($data);
+    //         return redirect('added');
+    //     }
+    //     return view('auth.register');
+    // }
+
+public function postValidates(PostRequest $request) {
+  if($request->isMethod('post')){
             $data = $request->input();
 
             $this->create($data);
             return redirect('added');
         }
         return view('auth.register');
-    }
+}
 
+    // 登録成功の画面
     public function added(){
         return view('auth.added');
     }

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class PostsController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
         return view('posts.index');
     }
@@ -16,7 +21,7 @@ class PostsController extends Controller
     {
         $post = $request->input('newPost');
         Post::create(['post' => $post]);
-        return redirect('posts.index');
+        return redirect('index');
     }
 
 }
