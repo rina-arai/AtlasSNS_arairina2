@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -67,11 +68,14 @@ class RegisterController extends Controller
     // 登録のメソッド
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'mail' => $data['mail'],
             'password' => bcrypt($data['password']),
-        ]);
+        ])
+        // 第１引数にはセッションキー、第２引数にはその値を指定
+        session()->flash('username', $user->username);
+        return $user;
     }
 
 
@@ -100,7 +104,8 @@ public function postValidates(PostRequest $request) {
 }
 
     // 登録成功の画面
-    public function added(){
-        return view('auth.added');
+    public function added(Request $request){
+        session()->get('username');
+        return view('auth.added',['username' => $username]);
     }
 }

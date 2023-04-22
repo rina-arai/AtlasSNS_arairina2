@@ -5,7 +5,8 @@
 {!! Form::open(['url' => '/register/create']) !!}
 
 <h2>新規ユーザー登録</h2>
-<!-- @if ($errors->any())
+<!-- 上にまとめてエラー文の表示
+@if ($errors->any())
     <div class="alert alert-danger mt-1">
         <ul>
             @foreach ($errors->all() as $error)
@@ -14,12 +15,15 @@
         </ul>
     </div>
 @endif -->
+
 {{ Form::label('ユーザー名') }}
+<!-- エラー文の表示 -->
 @if($errors->has('username'))
 			@foreach($errors->get('username') as $message)
 				{{ $message }}<br>
 			@endforeach
 		@endif
+		<!-- ユーザーネームのフォーム -->
 {{ Form::text('username',null,['class' => 'input']) }}<br>
 
 
@@ -42,12 +46,12 @@
 
 
 {{ Form::label('パスワード確認') }}
-@if($errors->has('password-confirm'))
-			@foreach($errors->get('password-confirm') as $message)
+@if($errors->has('password_confirmation'))
+			@foreach($errors->get('password_confirmation') as $message)
 				{{ $message }}<br>
 			@endforeach
 		@endif
-{{ Form::text('password-confirm',null,['class' => 'input']) }}<br>
+{{ Form::text('password_confirmation',null,['class' => 'input']) }}<br>
 
 
 {{ Form::submit('登録') }}

@@ -29,7 +29,8 @@ class PostRequest extends FormRequest
             'username' => 'required|string|between:2,12',
             'mail' => 'required|string|email|between:5,40|unique:users',
             // password_confirmedという項目(confirmed)
-            'password' => 'required|string|alpha_num|between:8,20|confirmed',
+            'password' => 'required|alpha_num|between:8,20|confirmed',
+            'password_confirmation' => 'required|alpha_num|between:8,20',
         ];
     }
 
