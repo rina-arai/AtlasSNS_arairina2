@@ -23,6 +23,9 @@ Auth::routes();
 // Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
 
+// ログアウト
+Route::get('/logout', 'Auth\LoginController@logout');
+
 // 新規登録について
 // Route::post('/register/create', 'Auth\RegisterController@register');
 Route::post('/register/create', 'Auth\RegisterController@postValidates');
