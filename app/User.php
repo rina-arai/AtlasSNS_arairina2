@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'mail', 'password',
+        'username', 'mail', 'password', 'image'
     ];
 
     /**
@@ -26,4 +26,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // usersテーブルのデータをクエリで引き出す際に、関連する投稿も出せるよう
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
 }

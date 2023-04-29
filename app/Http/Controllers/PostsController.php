@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\NewPostRequest;
+use App\Post;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -13,15 +17,17 @@ class PostsController extends Controller
     }
 
     public function index(){
-        return view('posts.index');
+        $list = Post::get();
+        return view('posts.index',['list'=>$list]);
     }
 
-    // 投稿内容の登録処理
-    public function create(Request $request)
+    // 投稿内容の登録処理！！！
+    public function create(NewPostRequest $request)
     {
         $post = $request->input('newPost');
-        Post::create(['post' => $post]);
-        return redirect('index');
+        // $post->user_id = auth()->user()->id;
+        Post::create(['post' => $post,'user_id' => auth()->user()->id]);
+        return redirect('posts/index');
     }
 
 }

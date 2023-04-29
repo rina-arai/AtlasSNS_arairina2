@@ -49,6 +49,7 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
 
+    //  バリデーション
     // protected function validator(array $data)
     // {
     //     return Validator::make($data, [
@@ -72,10 +73,11 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'mail' => $data['mail'],
             'password' => bcrypt($data['password']),
-        ])
+        ]);
+        // セッションへデータを保存する
         // 第１引数にはセッションキー、第２引数にはその値を指定
-        session()->flash('username', $user->username);
-        return $user;
+        session()->put(['username' => $user->username]);
+        return session()->get('username');
     }
 
 
@@ -93,6 +95,7 @@ class RegisterController extends Controller
     //     return view('auth.register');
     // }
 
+    // バリデーション後、新規登録成功後のメソッド
 public function postValidates(PostRequest $request) {
   if($request->isMethod('post')){
             $data = $request->input();
@@ -104,8 +107,9 @@ public function postValidates(PostRequest $request) {
 }
 
     // 登録成功の画面
-    public function added(Request $request){
-        session()->get('username');
-        return view('auth.added',['username' => $username]);
+    public function added(){
+        // セッションで保存したデータを取得
+        $value = session('username');
+        return view('auth.added');
     }
 }

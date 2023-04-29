@@ -28,10 +28,12 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::post('/register/create', 'Auth\RegisterController@postValidates');
 
 // 登録完了後の画面表示
-Route::get('/added/{username}', 'Auth\RegisterController@added');
+Route::get('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
 Route::get('/posts/index','PostsController@index');
+
+// 新規投稿について
 Route::post('/posts/create','PostsController@create');
 
 Route::get('/profile','UsersController@profile');

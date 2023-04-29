@@ -4,19 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class UsersController extends Controller
 {
     //
 
+/**
+     * Where to redirect users after registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/login';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
 
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    // プロフィールページへ
     public function profile(){
         return view('users.profile');
     }
+
+    // 検索ページへ
     public function search(){
         return view('users.search');
     }

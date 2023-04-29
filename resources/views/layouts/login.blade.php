@@ -27,7 +27,7 @@
                 <details>
                     <summary>
                 <div id="">
-                    <p>　<?php $user = Auth::user(); ?>{{ $user->username }}さん<img src="images/arrow.png"></p>
+                    <p>{{ Auth::user()->username }}さん<img src="{{Auth::user()->images}}"></p>
                 <div>
                     </summary>
                 <ul>
@@ -45,7 +45,7 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p>{{ Auth::user()->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
                 <p>〇〇名</p>
