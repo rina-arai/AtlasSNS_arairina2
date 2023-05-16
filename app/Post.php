@@ -12,6 +12,7 @@ class Post extends Model
     ];
 
     // postコントローラーでUserテーブルを取得
+    // 投稿は一つの投稿者に従属する
     public function user(){
         return $this->belongsTo('App\User');
       }

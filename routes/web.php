@@ -39,11 +39,19 @@ Route::get('/posts/index','PostsController@index');
 // 新規投稿について
 Route::post('/posts/create','PostsController@create');
 
-Route::get('/profile','UsersController@profile');
+// 投稿の編集について
+Route::put('/posts/update','PostsController@update');
 
-Route::get('/search','UsersController@search');
-// Route::get('/search','UsersController@searchForm')
-//     ->username('users.search');
+// 投稿の削除について
+Route::get('/posts/{id}/delete','PostsController@delete');
+
+// プロフィールページ表示
+Route::get('/users/profile','UsersController@profile');
+
+// 検索ページ表示
+Route::get('/users/search','UsersController@search');
+
+
 
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');

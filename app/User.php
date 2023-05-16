@@ -28,6 +28,7 @@ class User extends Authenticatable
     ];
 
     // usersテーブルのデータをクエリで引き出す際に、関連する投稿も出せるよう
+    // 投稿者は複数の投稿をもつ
     public function posts(){
         return $this->hasMany('App\Post');
     }

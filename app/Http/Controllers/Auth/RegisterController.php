@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'mail' => $data['mail'],
             'password' => bcrypt($data['password']),
         ]);
-        // セッションへデータを保存する
+        // セッションへ名前のデータを保存する
         // 第１引数にはセッションキー、第２引数にはその値を指定
         session()->put(['username' => $user->username]);
         return session()->get('username');

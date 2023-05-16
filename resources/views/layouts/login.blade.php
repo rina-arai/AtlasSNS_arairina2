@@ -18,6 +18,7 @@
     <!--iphoneのアプリアイコン指定-->
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
+
 </head>
 <body>
     <header>
@@ -28,11 +29,15 @@
                     <summary>
                 <div id="">
                     <p>{{ Auth::user()->username }}さん<img src="{{Auth::user()->images}}"></p>
+                    <!-- デバッグ関数 -->
+                    <!-- @php
+  dump(Auth::user()->images);
+@endphp -->
                 <div>
                     </summary>
                 <ul>
                     <li><a href="/posts/index">HOME</a></li>
-                    <li><a href="/profile">プロフィール編集</a></li>
+                    <li><a href="/users/profile">プロフィール編集</a></li>
                     <li><a href="/logout">ログアウト</a></li>
                 </ul>
 </details>
@@ -57,12 +62,14 @@
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
+            <p class="btn"><a href="/users/search">ユーザー検索</a></p>
         </div>
     </div>
     <footer>
     </footer>
-    <script src="JavaScriptファイルのURL"></script>
-    <script src="JavaScriptファイルのURL"></script>
+    <!-- jQuery読み込み -->
+    <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <!-- <script src="JavaScriptファイルのURL"></script> -->
 </body>
 </html>

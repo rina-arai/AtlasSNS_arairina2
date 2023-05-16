@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class UsersController extends Controller
@@ -29,29 +32,34 @@ class UsersController extends Controller
 
     // プロフィールページへ
     public function profile(){
-        return view('users.profile');
+        $user = Auth::user();
+        return view('/users/profile',['user'=>$user]);
     }
 
-    // 検索ページへ
-    public function search(){
-        return view('users.search');
-    }
+    // 検索機能の実行
+    public function search(Request $request){
 
-// 検索
-public function searchForm(Request $request)
-    {
-        $keyword = $request->input('keyword');
+        $user = Auth::user();
 
-        $query = Post::query();
+        // 検索フォームで入力された値を取得する
+        $keyword = $request->input('users');
+        dump($keyword);
 
-        if(!empty($keyword)) {
+        // データベースに問い合わせ
+            if (!empty($keyword)) {
+            $query = User::query();
             $query->where('username', 'LIKE', "%{$keyword}%");
+            $users = $query->get();
+            return view('/users/search',['users'=>$users],['user'=>$user],['keyword'=>$keyword]);
+            }
+            else{
+                $users = User::get();
+          return view('/users/search',['users'=>$users],['user'=>$user],['keyword'=>$keyword]
+          );
         }
 
-        $posts = $query->get();
+    //   return view('/users/search',['user'=>$user],['users'=>$users]);
 
-        return view('users.search', compact('posts', 'keyword'));
-
-}
+    }
 
 }

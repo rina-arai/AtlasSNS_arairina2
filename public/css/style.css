@@ -1,22 +1,80 @@
 @charset "utf-8";
-html{
-}
-body{
-}
+
+html {}
+
+body {}
+
 /* header */
-header{
-    background:#186AC9;
+header {
+    background: #186AC9;
 }
 
 /* main content */
-#row{
+#row {
     display: flex;
     flex-flow: row wrap;
 }
-#container{
+
+#container {
     flex: 0 0 80%;
 }
-#side-bar{
+
+#side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #727272;
+}
+
+.content {
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.modal {
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.modal__bg {
+    background: rgba(0, 0, 0, 0.8);
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+}
+
+.modal__content {
+    background: #fff;
+    left: 50%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+}
+
+/* 削除ボタン */
+.btn-trash {
+    cursor: pointer;
+    position: relative;
+}
+
+.btn-trash img {
+    position: absolute;
+    width: 100%;
+    display: block;
+}
+
+.btn-trash img:last-of-type {
+    opacity: 0;
+    transition: opacity .7s;
+}
+
+.btn-trash:hover img:last-of-type {
+    opacity: 1;
+}
+
+.btn-trash:hover img:nth-of-type(1) {
+    opacity: 0;
 }

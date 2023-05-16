@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewPostRequest extends FormRequest
+class UpdatePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,15 @@ class NewPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'newPost' => 'required|string|between:1,150',
+            'post' => 'required|string|between:1,150',
         ];
     }
 
     public function messages()
     {
   return [
-    'newPost.required' => '必須項目です',
-    'newPost.between' => '1文字以上,150文字以内で入力してください',
+    'post.required' => '必須項目です',
+    'post.between' => '1文字以上,150文字以内で入力してください',
   ];
 }
 }
