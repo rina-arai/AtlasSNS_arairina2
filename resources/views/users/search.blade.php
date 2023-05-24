@@ -26,6 +26,26 @@
             <tr>
                 <td>{{ $users->username }}</td>
                 <td><img src="{{ $users->images }}" alt="ユーザーアイコン"></td>
+                <!-- フォロー、解除ボタン -->
+                <td>
+                  <!-- フォローしているかの判定 -->
+                                    @if (auth()->user()->isFollowing($user->id))
+                                    <!-- フォロー解除 -->
+                                    <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button type="submit" class="btn btn-danger">フォロー解除</button>
+                                    </form>
+                                @else
+                                <!-- フォローする -->
+                                <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-primary">フォローする</button>
+                                    </form>
+                                @endif
+
+                </td>
+
             </tr>
             @endif
             @endforeach

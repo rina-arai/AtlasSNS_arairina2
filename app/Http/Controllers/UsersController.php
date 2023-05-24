@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Follow;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Database\Eloquent\Model;
 
 class UsersController extends Controller
 {
@@ -50,16 +51,15 @@ class UsersController extends Controller
             $query = User::query();
             $query->where('username', 'LIKE', "%{$keyword}%");
             $users = $query->get();
-            return view('/users/search',['users'=>$users],['user'=>$user],['keyword'=>$keyword]);
+            return view('/users/search',['users'=>$users,'user'=>$user,'keyword'=>$keyword]);
             }
             else{
                 $users = User::get();
-          return view('/users/search',['users'=>$users],['user'=>$user],['keyword'=>$keyword]
+          return view('/users/search',['users'=>$users,'user'=>$user,'keyword'=>$keyword]
           );
         }
-
-    //   return view('/users/search',['user'=>$user],['users'=>$users]);
-
     }
+
+
 
 }
