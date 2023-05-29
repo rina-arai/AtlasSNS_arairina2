@@ -13,6 +13,7 @@ class CreateFollowsTable extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('follows')) {
         Schema::create('follows', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('following_id');
@@ -21,6 +22,7 @@ class CreateFollowsTable extends Migration
             $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'));
 
         });
+    }
     }
 
     /**

@@ -25,29 +25,30 @@ class FollowsController extends Controller
     }
 
     // フォロー
-    public function follow(User $user)
-    {
-        $follower = auth()->user();
-        // フォローしているか
-        $is_following = $follower->isFollowing($user->id);
-        if(!$is_following) {
-            // フォローしていなければフォローする
-            $follower->follow($user->id);
-            return back();
-        }
+    public function follow(Request $request,$followed_id) {
+        $user = Auth::user();
+        $users = User::get();
+        $follow = Follow::create([
+            // フォローするのは自分なので,認証ユーザー＝フォローユーザー
+            'following_id' => \Auth::user()->id,
+            // 暗黙の結合などを使ってフォローされる相手のIDを$user->idで取得できるように
+            'followed_id' => $followed_id,
+            // ↑上記２つを使ってインスタンスを生成
+        ]);
+
+        return view('/users/search',['users'=>$users,'user'=>$user,]);
     }
 
     // フォロー解除
-    public function unfollow(User $user)
-    {
-        $follower = auth()->user();
-        // フォローしているか
-        $is_following = $follower->isFollowing($user->id);
-        if($is_following) {
-            // フォローしていればフォローを解除する
-            $follower->unfollow($user->id);
-            return back();
-        }
+    public function unfollow(Request $request,$followed_id) {
+        // 削除するユーザーのidを取得
+        $follow = Follow::where('following_id', \Auth::user()->id)->where('followed_id', $followed_id)->first();
+        $follow->delete();
+
+        $user = Auth::user();
+        $users = User::get();
+        return view('/users/search',['users'=>$users,'user'=>$user,]);
     }
+
 
 }

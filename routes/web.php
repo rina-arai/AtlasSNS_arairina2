@@ -52,8 +52,8 @@ Route::get('/users/profile','UsersController@profile');
 Route::get('/users/search','UsersController@search');
 
 // フォロー/フォロー解除を追加
-Route::post('users/search{id}/follow', 'FollowsController@follow')->name('follow');
-Route::delete('users/search{id}/unfollow', 'FollowsController@unfollow')->name('unfollow');
+Route::post('/users/search{followed_id}/follow', 'FollowsController@follow')->name('follow');
+Route::DELETE('/users/search{followed_id}/unfollow', 'FollowsController@unfollow')->name('unfollow');
 
 
 

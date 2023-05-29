@@ -29,16 +29,16 @@
                 <!-- フォロー、解除ボタン -->
                 <td>
                   <!-- フォローしているかの判定 -->
-                                    @if (auth()->user()->isFollowing($user->id))
+                                    @if (auth()->user()->isFollowing($users->id))
                                     <!-- フォロー解除 -->
-                                    <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
+                                    <form action="{{ route('unfollow', ['followed_id' => $users->id]) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type="submit" class="btn btn-danger">フォロー解除</button>
                                     </form>
                                 @else
                                 <!-- フォローする -->
-                                <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
+                                <form action="{{ route('follow', ['followed_id' => $users->id]) }}" method="POST">
                                         {{ csrf_field() }}
                                         <button type="submit" class="btn btn-primary">フォローする</button>
                                     </form>

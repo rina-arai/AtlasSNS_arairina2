@@ -36,40 +36,44 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
-
-    // フォロー機能のリレーション
-    public function following()
+// 第一引数には使用するモデル
+// 第二引数には使用するテーブル名
+// 第三引数にはリレーションを定義しているモデルの外部キー名(取得したい情報)自分のid
+// 第四引数には結合するモデルの外部キー名(あまりもの)
+    // フォロワー→フォロー(自分のことをフォローしているユーザーを探す)
+    public function followUsers()
     {
-        return $this->belongsToMany(User::class, 'id', 'followed_id', 'following_id');
+        return $this->belongsToMany('App\User', 'follows', 'followed_id', 'following_id');
     }
 
-    public function followed()
+    // フォロー→フォロワー(自分がフォローしているユーザーを探す)
+    public function follows()
     {
-        return $this->belongsToMany(User::class, 'id', 'following_id', 'followed_id');
+        return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id');
     }
 
     // フォローする
     public function follow(Int $user_id)
     {
-        return $this->following()->attach($user_id);
+        return $this->follows()->attach($user_id);
     }
 
     // フォロー解除する
     public function unfollow(Int $user_id)
     {
-        return $this->following()->detach($user_id);
+        return $this->follows()->detach($user_id);
     }
 
     // フォローしているか
     public function isFollowing(Int $user_id)
     {
-        return (boolean) $this->following()->where('followed_id', $user_id)->first(['id']);
+        return (boolean) $this->follows()->where('followed_id', $user_id)->first(['follows.id']);
     }
 
     // フォローされているか
     public function isFollowed(Int $user_id)
     {
-        return (boolean) $this->followed()->where('following_id', $user_id)->first(['id']);
+        return (boolean) $this->followUsers()->where('following_id', $user_id)->first(['follows.id']);
     }
 
 }

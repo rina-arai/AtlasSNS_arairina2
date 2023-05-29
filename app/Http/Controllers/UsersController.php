@@ -48,6 +48,7 @@ class UsersController extends Controller
 
         // データベースに問い合わせ
             if (!empty($keyword)) {
+                dd($keyword);
             $query = User::query();
             $query->where('username', 'LIKE', "%{$keyword}%");
             $users = $query->get();
@@ -59,6 +60,7 @@ class UsersController extends Controller
           );
         }
     }
+
 
 
 
