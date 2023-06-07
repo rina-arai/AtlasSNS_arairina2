@@ -7,6 +7,7 @@ use App\Http\Requests\NewPostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Post;
 use App\User;
+use App\Follow;
 use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
@@ -18,9 +19,20 @@ class PostsController extends Controller
     }
 
     public function index(){
-        $post = Post::get();
         $user = Auth::user();
-        return view('posts.index',['post'=>$post],['user'=>$user]);
+        // $following_idは配列の形でないと、$postsでwhereInが使えない
+        $following_id = $user->follows()->pluck('followed_id');
+        // []で配列の宣言
+        $following_id[] = $user->id; // ログインユーザー自身の投稿も含める場合はこの行を追加
+        // user_id=$following_idのpostsテーブルの値を取得して新しい順に並べる
+        // Where句に複数の値を指定したい(whereIn),getメソッドを使うと対象になった複数のデータを取得
+        $posts = Post::whereIn('user_id', $following_id)->latest()->get();
+        // dump($posts);
+        // フォロー数
+        $following_count = $user->follows()->pluck('following_id');
+        // フォロワー数
+        $followed_count = $user->followUsers()->pluck('followed_id');
+        return view('posts.index',['user'=>$user,'posts'=>$posts,'following_count'=>$following_count,'followed_count'=>$followed_count,]);
     }
 
 

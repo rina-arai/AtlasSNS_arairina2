@@ -46,7 +46,10 @@ Route::put('/posts/update','PostsController@update');
 Route::get('/posts/{id}/delete','PostsController@delete');
 
 // プロフィールページ表示
-Route::get('/users/profile','UsersController@profile');
+Route::get('/users/{id}/profile','UsersController@profile');
+// プロフィールページ フォロー/フォロー解除を追加
+Route::post('/users/profile{followed_id}/follow', 'UsersController@follow')->name('follow_p');
+Route::DELETE('/users/profile{followed_id}/unfollow', 'UsersController@unfollow')->name('unfollow_p');
 
 // 検索ページ表示
 Route::get('/users/search','UsersController@search');
@@ -55,7 +58,6 @@ Route::get('/users/search','UsersController@search');
 Route::post('/users/search{followed_id}/follow', 'FollowsController@follow')->name('follow');
 Route::DELETE('/users/search{followed_id}/unfollow', 'FollowsController@unfollow')->name('unfollow');
 
-
-
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+// フォロー/フォロワーリストの表示
+Route::get('/follow-list','FollowsController@followList');
+Route::get('/follower-list','FollowsController@followerList');

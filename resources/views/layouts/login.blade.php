@@ -28,7 +28,7 @@
                 <details>
                     <summary>
                 <div id="">
-                    <p>{{ Auth::user()->username }}さん<img src="{{Auth::user()->images}}"></p>
+                    <p>{{ Auth::user()->username }}さん<img src="{{$user->images}}"></p>
                     <!-- デバッグ関数 -->
                     <!-- @php
   dump(Auth::user()->images);
@@ -37,7 +37,7 @@
                     </summary>
                 <ul>
                     <li><a href="/posts/index">HOME</a></li>
-                    <li><a href="/users/profile">プロフィール編集</a></li>
+                    <li><a href="/users/{{ $user->id }}/profile">プロフィール編集</a></li>
                     <li><a href="/logout">ログアウト</a></li>
                 </ul>
 </details>
@@ -53,12 +53,12 @@
                 <p>{{ Auth::user()->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇〇名</p>
+                <p>{{ $following_count->count() }}名</p>
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p>{{ $followed_count->count() }}名</p>
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>

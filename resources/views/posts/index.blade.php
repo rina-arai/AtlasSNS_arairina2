@@ -26,7 +26,7 @@
 <!-- 投稿一覧 -->
 <div class="container-list">
         <table class='table table-hover'>
-            @foreach ($post as $post)
+            @foreach ($posts as $post)
             <tr>
                 <td>{{ $post->user->username }}</td>
                 <td><img src="{{ $post->user->images }}" alt="ユーザーアイコン"></td>

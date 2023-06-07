@@ -17,12 +17,36 @@ class FollowsController extends Controller
         $this->middleware('auth');
     }
 
+    // フォローリスト
     public function followList(){
-        return view('follows.followList');
+        // フォローしているユーザーのidを取得
+        $following_id = Auth::user()->follows()->pluck('followed_id');
+        $users = User::find($following_id);
+        $posts = Post::query()->whereIn('user_id', Auth::user()->follows()->pluck('followed_id'))->latest()->get();
+        dump($posts);
+        $user = Auth::user();
+        // フォロー数
+        $following_count = $user->follows()->pluck('following_id');
+        // フォロワー数
+        $followed_count = $user->followUsers()->pluck('followed_id');
+        return view('follows.followList',['following_id'=>$following_id,'users'=>$users,'posts'=>$posts,'following_count'=>$following_count,'followed_count'=>$followed_count,]);
     }
+
+
     public function followerList(){
-        return view('follows.followerList');
+        // フォローしているユーザーのidを取得
+        $followed_id = Auth::user()->followUsers()->pluck('following_id');
+        $users = User::find($followed_id);
+        $posts = Post::query()->whereIn('user_id', Auth::user()->followUsers()->pluck('following_id'))->latest()->get();
+        dump($posts);
+        // フォロー数
+        $following_count = Auth::user()->follows()->pluck('following_id');
+        // フォロワー数
+        $followed_count = Auth::user()->followUsers()->pluck('followed_id');
+        return view('follows.followerList',['followed_id'=>$followed_id,'users'=>$users,'posts'=>$posts,'following_count'=>$following_count,'followed_count'=>$followed_count,]);
     }
+
+
 
     // フォロー
     public function follow(Request $request,$followed_id) {
@@ -36,7 +60,7 @@ class FollowsController extends Controller
             // ↑上記２つを使ってインスタンスを生成
         ]);
 
-        return view('/users/search',['users'=>$users,'user'=>$user,]);
+        return view('/users/search',['users'=>$users,'user'=>$user,'following_count'=>$following_count,'followed_count'=>$followed_count]);
     }
 
     // フォロー解除
@@ -47,7 +71,7 @@ class FollowsController extends Controller
 
         $user = Auth::user();
         $users = User::get();
-        return view('/users/search',['users'=>$users,'user'=>$user,]);
+        return view('/users/search',['users'=>$users,'user'=>$user,'following_count'=>$following_count,'followed_count'=>$followed_count]);
     }
 
 
