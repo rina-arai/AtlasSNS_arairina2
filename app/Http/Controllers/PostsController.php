@@ -46,8 +46,8 @@ class PostsController extends Controller
         return redirect('posts/index');
     }
 
-    // 投稿内容の編集処理！！！(バリデーションまだ)
-    public function update(UpdatePostRequest $request)
+    // 投稿内容の編集処理！！！
+    public function update(Request $request)
 {
     $post = Post::find($request->id);
     $post->update([

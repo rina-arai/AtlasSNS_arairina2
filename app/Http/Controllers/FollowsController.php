@@ -60,7 +60,7 @@ class FollowsController extends Controller
             // ↑上記２つを使ってインスタンスを生成
         ]);
 
-        return view('/users/search',['users'=>$users,'user'=>$user,'following_count'=>$following_count,'followed_count'=>$followed_count]);
+        return back();
     }
 
     // フォロー解除
@@ -71,7 +71,7 @@ class FollowsController extends Controller
 
         $user = Auth::user();
         $users = User::get();
-        return view('/users/search',['users'=>$users,'user'=>$user,'following_count'=>$following_count,'followed_count'=>$followed_count]);
+        return back();
     }
 
 

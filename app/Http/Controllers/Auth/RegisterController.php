@@ -97,6 +97,8 @@ class RegisterController extends Controller
 
     // バリデーション後、新規登録成功後のメソッド
 public function postValidates(PostRequest $request) {
+//     isMethod() 引数に指定した文字列とHTTP動詞が一致するかを判定する
+// 一致すればtrueが、しなければfalseが返る
   if($request->isMethod('post')){
             $data = $request->input();
 

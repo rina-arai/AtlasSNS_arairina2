@@ -8,28 +8,65 @@
 <!-- フォーム -->
 <div>
 <img src="{{$users->images}}">
+{{Form::open(['url' => '/users/profile/update', 'files' => true])}}
+
+
+<!-- ユーザーネーム -->
 {{ Form::label('user name') }}
-{{ Form::text('username',null,['class' => 'input']) }}<br>
+<!-- エラー文の表示 -->
+@if($errors->has('username'))
+			@foreach($errors->get('username') as $message)
+				{{ $message }}<br>
+			@endforeach
+		@endif
+{{ Form::text('username',$users->username,['class' => 'input']) }}<br>
 
-
+<!-- メール -->
 {{ Form::label('mail address') }}
-{{ Form::text('mail',null,['class' => 'input']) }}<br>
+<!-- エラー文の表示 -->
+@if($errors->has('mail'))
+			@foreach($errors->get('mail') as $message)
+				{{ $message }}<br>
+			@endforeach
+		@endif
+{{ Form::text('mail',$users->mail,['class' => 'input']) }}<br>
 
-
+<!-- パスワード -->
 {{ Form::label('password') }}
+<!-- エラー文の表示 -->
+@if($errors->has('password'))
+			@foreach($errors->get('password') as $message)
+				{{ $message }}<br>
+			@endforeach
+		@endif
 {{ Form::password('password',null,['class' => 'input']) }}<br>
 
-
+<!-- パスワード確認 -->
 {{ Form::label('password confirm') }}
 {{ Form::password('password_confirmation',null,['class' => 'input']) }}<br>
 
+<!-- 自己紹介 -->
 {{ Form::label('bio') }}
-{{ Form::text('bio',null,['class' => 'input']) }}<br>
+<!-- エラー文の表示 -->
+@if($errors->has('bio'))
+			@foreach($errors->get('bio') as $message)
+				{{ $message }}<br>
+			@endforeach
+		@endif
+{{ Form::text('bio',$users->bio,['class' => 'input']) }}<br>
 
+<!-- アイコン -->
 {{ Form::label('icon image') }}
-{{ Form::image('icon',null,['class' => 'input']) }}<br>
+<!-- エラー文の表示 -->
+@if($errors->has('IconImage'))
+			@foreach($errors->get('IconImage') as $message)
+				{{ $message }}<br>
+			@endforeach
+		@endif
+{{ Form::file('IconImage',null,['class' => 'file']) }}<br>
 
 {{ Form::submit('更新') }}
+{{Form::close()}}
 </div>
 
 @else

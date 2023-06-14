@@ -47,6 +47,10 @@ Route::get('/posts/{id}/delete','PostsController@delete');
 
 // プロフィールページ表示
 Route::get('/users/{id}/profile','UsersController@profile');
+
+// プロフィール更新
+Route::post('/users/profile/update','UsersController@profileUpdate');
+
 // プロフィールページ フォロー/フォロー解除を追加
 Route::post('/users/profile{followed_id}/follow', 'UsersController@follow')->name('follow_p');
 Route::DELETE('/users/profile{followed_id}/unfollow', 'UsersController@unfollow')->name('unfollow_p');

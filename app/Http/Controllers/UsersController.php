@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ProRequest;
 use App\Post;
 use App\User;
 use App\Follow;
@@ -47,6 +48,32 @@ class UsersController extends Controller
         $posts = Post::whereIn('user_id', $users)->latest()->get();
         return view('/users/profile',['user'=>$user,'users'=>$users,'posts'=>$posts,'following_count'=>$following_count,'followed_count'=>$followed_count,]);
     }
+
+    // プロフィール編集
+    public function profileUpdate(ProRequest $request)
+    {
+        $user = Auth::user();
+        $update = [
+        'username' => $request->input('username'),
+        'mail' => $request->input('mail'),
+        'bio' => $request->input('bio'),
+        'IconImage' => $request->input('IconImage'),
+    ];
+
+    // パスワードが入力された場合のみ更新
+    // filled() 指定したキーの有無 && 値が入力されているか、キーが存在しており、かつ値が入力されていたらtrue。
+    if ($request->filled('password')) {
+       // $update配列に'password'というキーに対して、バリデーションを実装
+        // $変数[''] = ;←連想配列における要素の追加や更新を 行うためのコード
+        $update['password'] = bcrypt($request->input('password'));
+    }
+
+    // まとめてupdate関数
+    $user->update($update);
+
+    return redirect('posts/index');
+    }
+
 
     // フォロー
     public function follow(Request $request,$followed_id) {
