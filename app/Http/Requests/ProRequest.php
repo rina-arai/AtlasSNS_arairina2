@@ -30,7 +30,7 @@ class ProRequest extends FormRequest
         'username' => 'required|string|between:2,12',
         'mail' => 'required|string|email|between:5,40|unique:users,mail,' . $user->id . ',id',
         'bio' => 'max:150',
-        'IconImage' => 'file|image|mimes:jpeg,png,bmp,gif,svg',
+        'image' => 'file|image|mimes:jpeg,png,bmp,gif,svg',
     ];
 
     // パスワードが入力されている場合にのみバリデーションルールを追加
@@ -56,7 +56,7 @@ class ProRequest extends FormRequest
     'password.alpha_num' => '英数字のみで入力してください',
     'password.between' => '8～20で入力してください',
     'password.confirmed' => 'このパスワードは違います',
-    'IconImage.mimes' => 'この拡張子は使用できません。',
+    'image.mimes' => 'この拡張子は使用できません。',
     'bio.max' => '150字以内で入力してください',
   ];
 }

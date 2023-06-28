@@ -4,8 +4,10 @@
 
 {!! Form::open(['url' => '/register/create']) !!}
 
-<h2>新規ユーザー登録</h2>
+<h2 class="h2">新規ユーザー登録</h2>
 
+<div class="logout-f">
+<div class="logout-input">
 {{ Form::label('ユーザー名') }}
 <!-- エラー文の表示 -->
 @if($errors->has('username'))
@@ -15,8 +17,9 @@
 		@endif
 		<!-- フォーム -->
 {{ Form::text('username',null,['class' => 'input']) }}<br>
+</div>
 
-
+<div class="logout-input">
 {{ Form::label('メールアドレス') }}
 <!-- エラー文の表示 -->
 @if($errors->has('mail'))
@@ -26,8 +29,9 @@
 		@endif
 		<!-- フォーム -->
 {{ Form::text('mail',null,['class' => 'input']) }}<br>
+</div>
 
-
+<div class="logout-input">
 {{ Form::label('パスワード') }}
 <!-- エラー文の表示 -->
 @if($errors->has('password'))
@@ -36,10 +40,11 @@
 			@endforeach
 		@endif
 		<!-- フォーム -->
-{{ Form::password('password',null,['class' => 'input']) }}<br>
+{{ Form::password('password',['class' => 'input form-control']) }}<br>
+</div>
 
-
-{{ Form::label('パスワード確認') }}
+<div class="logout-input">
+{{ Form::label('パスワード確認') }}<br>
 <!-- エラー文の表示 -->
 @if($errors->has('password_confirmation'))
 			@foreach($errors->get('password_confirmation') as $message)
@@ -47,12 +52,14 @@
 			@endforeach
 		@endif
 		<!-- フォーム -->
-{{ Form::password('password_confirmation',null,['class' => 'input']) }}<br>
+{{ Form::password('password_confirmation',['class' => 'input form-control']) }}<br>
+</div>
+<div class = " submit-d">
+{{ Form::submit('REGISTER',['class' => 'btn btn-danger']) }}
+</div>
+</div>
 
-
-{{ Form::submit('登録') }}
-
-<p><a href="/login">ログイン画面へ戻る</a></p>
+<p class="new"><a href="/login">ログイン画面へ戻る</a></p>
 
 {!! Form::close() !!}
 

@@ -1,33 +1,36 @@
 @extends('layouts.login')
 
 @section('content')
+
+<div class="container-list">
+
 <!-- 検索窓 -->
-<div>
-  <form action="{{ url('/users/search') }}" method="GET">
+<div id = "container-search">
+  <form action="{{ url('/users/search') }}" class="input" method="GET">
     <input type="keyword" name="users"  placeholder="ユーザー名">
-    <button type="submit" class="btn btn-success pull-right"><img src="/images/search.png"></button>
+    <button type="submit" class="btn"><img src="/images/search.png"></button>
   </form>
-</div>
+
 
 <!-- 検索ワードの表示 -->
 @if (!empty($keyword))
   <p>検索ワード：{{ $keyword }}</p>
 @endif
 
+</div>
 
 
 <!-- //* 保存されているレコードを一覧表示 *// -->
-<div class="container-list">
 
-        <table class='table table-hover'>
+        <table class='table list-group-item table-search'>
             @foreach ($users as $users)
             <!-- 自分以外のユーザーの表示 -->
             @if (!($user->username == $users->username))
             <tr>
-                <td>{{ $users->username }}</td>
-                <td><img src="{{ $users->images }}" alt="ユーザーアイコン"></td>
+                <td class="col"><img src="{{ $users->images }}" class = "icon" alt="ユーザーアイコン"></td>
+                <td class="col-7">{{ $users->username }}</td>
                 <!-- フォロー、解除ボタン -->
-                <td>
+                <td class="col">
                   <!-- フォローしているかの判定 -->
                                     @if (auth()->user()->isFollowing($users->id))
                                     <!-- フォロー解除 -->
@@ -45,7 +48,6 @@
                                 @endif
 
                 </td>
-
             </tr>
             @endif
             @endforeach

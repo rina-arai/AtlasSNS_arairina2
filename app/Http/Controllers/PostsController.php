@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\NewPostRequest;
-use App\Http\Requests\UpdatePostRequest;
 use App\Post;
 use App\User;
 use App\Follow;

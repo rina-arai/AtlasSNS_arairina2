@@ -9,6 +9,7 @@ use App\User;
 use App\Follow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -53,11 +54,11 @@ class UsersController extends Controller
     public function profileUpdate(ProRequest $request)
     {
         $user = Auth::user();
+
         $update = [
         'username' => $request->input('username'),
         'mail' => $request->input('mail'),
         'bio' => $request->input('bio'),
-        'IconImage' => $request->input('IconImage'),
     ];
 
     // パスワードが入力された場合のみ更新
@@ -66,6 +67,16 @@ class UsersController extends Controller
        // $update配列に'password'というキーに対して、バリデーションを実装
         // $変数[''] = ;←連想配列における要素の追加や更新を 行うためのコード
         $update['password'] = bcrypt($request->input('password'));
+    }
+
+    // 画像が入力された場合のみ更新
+    // filled() 指定したキーの有無 && 値が入力されているか、キーが存在しており、かつ値が入力されていたらtrue。
+    if ($request->filled('images')) {
+       // $update配列に'images'というキーに対して、バリデーションを実装
+        // $変数[''] = ;←連想配列における要素の追加や更新を 行うためのコード
+        $file = $request->file('image')->store('public');
+        $path = Storage::url($file); // 画像のパスを生成
+        $update['images'] = $path;
     }
 
     // まとめてupdate関数
@@ -114,11 +125,11 @@ class UsersController extends Controller
 
         // 検索フォームで入力された値を取得する
         $keyword = $request->input('users');
-        dump($keyword);
+        // dump($keyword);
 
         // データベースに問い合わせ
             if (!empty($keyword)) {
-                dd($keyword);
+                // dd($keyword);
             $query = User::query();
             $query->where('username', 'LIKE', "%{$keyword}%");
             $users = $query->get();

@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="description" content="ページの内容を表す文章" />
   <title></title>
+  <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
   <link rel="stylesheet" href="{{ asset('css/logout.css') }} ">
   <!--スマホ,タブレット対応-->
@@ -20,11 +22,11 @@
   <!--OGPタグ/twitterカード-->
 </head>
 <body>
-  <header>
+  <header class="logout-h">
     <h1><a href="http://127.0.0.1:8000/login"><img src="images/atlas.png"></a></h1>
     <p>Social Network Service</p>
   </header>
-  <div id="container">
+  <div id="container" class="logout-c">
     @yield('content')
   </div>
   <script src="JavaScriptファイルのURL"></script>

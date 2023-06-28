@@ -23,7 +23,7 @@ class FollowsController extends Controller
         $following_id = Auth::user()->follows()->pluck('followed_id');
         $users = User::find($following_id);
         $posts = Post::query()->whereIn('user_id', Auth::user()->follows()->pluck('followed_id'))->latest()->get();
-        dump($posts);
+        // dump($posts);
         $user = Auth::user();
         // フォロー数
         $following_count = $user->follows()->pluck('following_id');
@@ -38,7 +38,7 @@ class FollowsController extends Controller
         $followed_id = Auth::user()->followUsers()->pluck('following_id');
         $users = User::find($followed_id);
         $posts = Post::query()->whereIn('user_id', Auth::user()->followUsers()->pluck('following_id'))->latest()->get();
-        dump($posts);
+        // dump($posts);
         // フォロー数
         $following_count = Auth::user()->follows()->pluck('following_id');
         // フォロワー数

@@ -6,77 +6,103 @@
 <!-- 自分のプロフィール -->
 
 <!-- フォーム -->
-<div>
-<img src="{{$users->images}}">
+<div class="profile">
+<img src="{{$users->images}}" class="icon">
 {{Form::open(['url' => '/users/profile/update', 'files' => true])}}
 
 
 <!-- ユーザーネーム -->
-{{ Form::label('user name') }}
-<!-- エラー文の表示 -->
+<div class="pro-form">
+{{ Form::label('name','user name',['class' => 'label']) }}
+  <!-- エラー文の表示 -->
 @if($errors->has('username'))
 			@foreach($errors->get('username') as $message)
 				{{ $message }}<br>
 			@endforeach
 		@endif
-{{ Form::text('username',$users->username,['class' => 'input']) }}<br>
+{{ Form::text('username',$users->username,['class' => 'input form-control']) }}<br>
+</div>
 
 <!-- メール -->
-{{ Form::label('mail address') }}
-<!-- エラー文の表示 -->
+<div class="pro-form">
+{{ Form::label('name','mail address',['class' => 'label']) }}
+  <!-- エラー文の表示 -->
 @if($errors->has('mail'))
 			@foreach($errors->get('mail') as $message)
 				{{ $message }}<br>
 			@endforeach
 		@endif
-{{ Form::text('mail',$users->mail,['class' => 'input']) }}<br>
+{{ Form::text('mail',$users->mail,['class' => 'input form-control']) }}<br>
+</div>
 
 <!-- パスワード -->
-{{ Form::label('password') }}
-<!-- エラー文の表示 -->
+<div class="pro-form">
+{{ Form::label('name','password',['class' => 'label']) }}
+  <!-- エラー文の表示 -->
 @if($errors->has('password'))
 			@foreach($errors->get('password') as $message)
 				{{ $message }}<br>
 			@endforeach
 		@endif
-{{ Form::password('password',null,['class' => 'input']) }}<br>
+{{ Form::password('password',['class' => 'input form-control']) }}<br>
+</div>
 
 <!-- パスワード確認 -->
-{{ Form::label('password confirm') }}
-{{ Form::password('password_confirmation',null,['class' => 'input']) }}<br>
+<div class="pro-form">
+{{ Form::label('name','password confirm',['class' => 'label']) }}
+{{ Form::password('password_confirmation',['class' => 'input form-control']) }}<br>
+</div>
 
 <!-- 自己紹介 -->
-{{ Form::label('bio') }}
-<!-- エラー文の表示 -->
+<div class="pro-form">
+{{ Form::label('name','bio',['class' => 'label']) }}
+  <!-- エラー文の表示 -->
 @if($errors->has('bio'))
 			@foreach($errors->get('bio') as $message)
 				{{ $message }}<br>
 			@endforeach
 		@endif
-{{ Form::text('bio',$users->bio,['class' => 'input']) }}<br>
+{{ Form::text('bio',$users->bio,['class' => 'input form-control']) }}<br>
+</div>
 
 <!-- アイコン -->
-{{ Form::label('icon image') }}
-<!-- エラー文の表示 -->
-@if($errors->has('IconImage'))
-			@foreach($errors->get('IconImage') as $message)
+<div class="pro-form">
+{{ Form::label('name','icon image',['class' => 'label']) }}
+  <!-- エラー文の表示 -->
+@if($errors->has('image'))
+			@foreach($errors->get('image') as $message)
 				{{ $message }}<br>
 			@endforeach
 		@endif
-{{ Form::file('IconImage',null,['class' => 'file']) }}<br>
+<label class="form-control pro-file">
+{{ Form::file('image',['class' => 'file','id' => 'formFile']) }}<p>ファイルを選択</p>
+</label><br>
+</div>
 
-{{ Form::submit('更新') }}
+<div class="pro-btn">
+{{ Form::submit('更新',['class' => 'btn btn-danger']) }}
+</div>
+
 {{Form::close()}}
 </div>
 
 @else
 <!-- 自分以外のユーザー -->
-<div>
+<div class="container gx-0 mw-100 profile-other">
   <!-- ユーザーアイコン -->
-  <img src="{{$users->images}}">
-  <p>{{$users->username}}</p>
-  <div>
+  <div id = "container-head">
+  <div class="profile-left">
+  <img src="{{$users->images}}" class="icon">
+  <div class="profile-lists">
+  <div class="profile-list">
+    <p>name</p>
+    <p>{{$users->username}}</p>
+  </div>
+  <div class="profile-list">
+    <p>bio</p>
     <p>{{$users->bio}}</p>
+  </div>
+  </div>
   </div>
 
   <!-- フォローしているかの判定 -->
@@ -94,20 +120,25 @@
         <button type="submit" class="btn btn-primary">フォローする</button>
       </form>
       @endif
+  </div>
 </div>
 
 <!-- 投稿一覧 -->
 <div class="container-list">
-        <table class='table table-hover'>
+        <ul  class="list-group list-group-flush">
             @foreach ($posts as $post)
-            <tr>
-                <td>{{ $post->user->username }}</td>
-                <td><img src="{{ $post->user->images }}" alt="ユーザーアイコン"></td>
-                <td>{{ $post->post }}</td>
-                <td>{{ $post->created_at }}</td>
-            </tr>
+            <li class="list-group-item">
+              <div class="table-post">
+                  <p><img src="{{ $post->user->images }}" class="icon" alt="ユーザーアイコン"></p>
+                  <div class="table-posts">
+                  <p class="post-name">{{ $post->user->username }}</p>
+                  <p class="post-text">{{ $post->post }}</p>
+                  </div>
+                  <p class="post-time">{{ $post->created_at->format("Y/m/d H:i") }}</p>
+              </div>
+            </li>
             @endforeach
-        </table>
+        </ul>
     </div>
 
     @endif
