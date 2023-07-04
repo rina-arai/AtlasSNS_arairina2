@@ -18,7 +18,8 @@
 
   <div class = " submit-d">
   {{ Form::submit('LOGIN',['class' => 'btn btn-danger']) }}
-</div>
+  @csrf
+  </div>
 
 </div>
 <p class="new"><a href="/register">新規ユーザーの方はこちら</a></p>

@@ -27,46 +27,46 @@
 <body>
     <header>
         <div id = "head">
-            <h1><a href="http://127.0.0.1:8000/posts/index"><img src="/images/atlas.png"></a></h1>
-            <div id="menu">
+            <h1><a href="http://127.0.0.1:8000/posts/index"><img src="/images/atlas.png" alt="atlas"></a></h1>
+            <nav id="menu">
                 <details>
                  <summary>
-                  <div id="menu-icon">
-                    <p>{{ Auth::user()->username }} さん</p><span class="up-icon"></span>
+                  <div id="menuIcon">
+                    <p>{{ Auth::user()->username }} さん</p><span class="up_icon"></span>
                   </div>
                  </summary>
-                 <ul class="dropdown-lists">
+                 <ul class="dropdown_lists">
                     <li><a href="/posts/index">HOME</a></li>
                     <li><a href="/users/{{ $user->id }}/profile">プロフィール編集</a></li>
                     <li><a href="/logout">ログアウト</a></li>
                  </ul>
                 </details>
-                <img src="{{$user->images}}" class="icon">
-            </div>
+                <p><img src="{{$user->images}}" class="icon" alt="ユーザーアイコン"></p>
+            </nav>
         </div>
     </header>
-    <div id="row">
+    <main id="row">
         <div id="container">
             @yield('content')
         </div >
         <div id="side-bar">
             <div id="confirm">
                 <p>{{ Auth::user()->username }}さんの</p>
-                <div class="side-n">
+                <div class="side_n">
                 <p>フォロー数</p>
                 <p>{{ $following_count->count() }}名</p>
                 </div>
-                <div class="side-btn"><button type="button" class="btn btn-primary"><a href="/follow-list">フォローリスト</a></button></div>
-                <div class="side-n">
+                <div class="side_btn"><button type="button" class="btn btn-primary"><a href="/follow-list">フォローリスト</a></button></div>
+                <div class="side_n">
                 <p>フォロワー数</p>
                 <p>{{ $followed_count->count() }}名</p>
                 </div>
-                <div class="side-btn"><button type="button" class="btn btn-primary"><a href="/follower-list">フォロワーリスト</a></button></div>
+                <div class="side_btn"><button type="button" class="btn btn-primary"><a href="/follower-list">フォロワーリスト</a></button></div>
             </div>
 
-            <div class="side-btn-s"><button type="button" class="btn btn-primary"><a href="/users/search">ユーザー検索</a></button></div>
+            <div class="side_btn_s"><button type="button" class="btn btn-primary"><a href="/users/search">ユーザー検索</a></button></div>
         </div>
-    </div>
+    </main>
     <footer>
     </footer>
     <!-- jQuery読み込み -->

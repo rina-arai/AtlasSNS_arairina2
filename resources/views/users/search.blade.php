@@ -2,27 +2,25 @@
 
 @section('content')
 
-<div class="container-list">
-
-<!-- 検索窓 -->
-<div id = "container-search">
-  <form action="{{ url('/users/search') }}" class="input" method="GET">
-    <input type="keyword" name="users"  placeholder="ユーザー名">
-    <button type="submit" class="btn"><img src="/images/search.png"></button>
-  </form>
+  <!-- 検索窓 -->
+  <section id = "containerSearch">
+      <form action="{{ url('/users/search') }}" class="input" method="GET">
+          <input type="keyword" name="users"  placeholder="ユーザー名">
+          <button type="submit" class="btn"><img src="/images/search.png" alt="検索"></button>
+      </form>
 
 
-<!-- 検索ワードの表示 -->
-@if (!empty($keyword))
-  <p>検索ワード：{{ $keyword }}</p>
-@endif
+    <!-- 検索ワードの表示 -->
+    @if (!empty($keyword))
+        <p>検索ワード：{{ $keyword }}</p>
+    @endif
+  </section>
 
-</div>
 
+  <!-- //* 保存されているレコードを一覧表示 *// -->
 
-<!-- //* 保存されているレコードを一覧表示 *// -->
-
-        <table class='table list-group-item table-search'>
+  <section>
+        <table class='table list-group-item table_search'>
             @foreach ($users as $users)
             <!-- 自分以外のユーザーの表示 -->
             @if (!($user->username == $users->username))
@@ -52,7 +50,6 @@
             @endif
             @endforeach
         </table>
-
-    </div>
+  </section>
 
 @endsection

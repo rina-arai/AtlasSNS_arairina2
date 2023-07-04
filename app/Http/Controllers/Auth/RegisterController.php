@@ -73,6 +73,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'mail' => $data['mail'],
             'password' => bcrypt($data['password']),
+            'images' => '/storage/Atlas.png',
         ]);
         // セッションへ名前のデータを保存する
         // 第１引数にはセッションキー、第２引数にはその値を指定

@@ -42,6 +42,7 @@ class ProRequest extends FormRequest
         $rules['password_confirmation'] = 'alpha_num|between:8,20';
     }
 
+
     return $rules;
     }
 

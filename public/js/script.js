@@ -28,3 +28,34 @@ $(function () {
     return false;
   });
 });
+
+// 画像アップロード　ファイル名表示
+$('input').on('change', function () {
+  // prop()でfilesプロパティを取得 最後の[0]は最初のファイルという意味
+    var file = $(this).prop('files')[0];
+    $('.file_name').text(file.name);
+});
+
+// 削除アラート
+function showConfirmationModal(message, href) {
+    const alertElement = document.getElementById('customAlert');
+    const messageElement = document.getElementById('alertMessage');
+    const confirmButton = document.getElementById('confirmButton');
+    const cancelButton = document.getElementById('cancelButton');
+
+    // アラートのメッセージを設定
+    messageElement.textContent = message;
+
+    // アラートを表示
+    alertElement.style.display = 'block';
+
+    // はいボタンがクリックされた場合の処理
+    confirmButton.onclick = function() {
+      window.location.href = href; // リンクの遷移
+    };
+
+    // いいえボタンがクリックされた場合の処理
+    cancelButton.onclick = function() {
+      alertElement.style.display = 'none'; // アラートを非表示
+    };
+  }

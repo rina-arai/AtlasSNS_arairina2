@@ -14,7 +14,7 @@ class AddCreateUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-    $table->string('images')->default('/storage/no_image.png')->change();
+    $table->string('images')->default('Atlas.png')->change();
 });
 
     }

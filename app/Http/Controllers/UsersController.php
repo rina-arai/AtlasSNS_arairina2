@@ -71,10 +71,10 @@ class UsersController extends Controller
 
     // 画像が入力された場合のみ更新
     // filled() 指定したキーの有無 && 値が入力されているか、キーが存在しており、かつ値が入力されていたらtrue。
-    if ($request->filled('images')) {
+    if ($request->filled('image')) {
        // $update配列に'images'というキーに対して、バリデーションを実装
         // $変数[''] = ;←連想配列における要素の追加や更新を 行うためのコード
-        $file = $request->file('image')->store('public');
+        $file = $request->file('image')->store('public')->getClientOriginalName();
         $path = Storage::url($file); // 画像のパスを生成
         $update['images'] = $path;
     }
