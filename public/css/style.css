@@ -12,7 +12,9 @@ body {
 
 }
 
-/* header */
+
+
+/* ↓↓↓header↓↓↓ */
 header {
     background: #186AC9;
 }
@@ -22,11 +24,14 @@ header {
     justify-content: space-between;
     padding: 30px;
 }
+
 #head h1 img {
     height: 50px;
 }
 
-/* ドロップダウンメニュー */
+
+
+/* ↓↓↓ドロップダウンメニュー↓↓↓ */
 #menu {
     display: flex;
     justify-content: space-between;
@@ -41,7 +46,6 @@ header {
     height: 50px;
 }
 
-
 summary {
     /* display: list-item;以外を指定してデフォルトの三角形アイコンを消します */
     display: block;
@@ -52,14 +56,14 @@ summary::-webkit-details-marker {
     display: none;
 }
 
-#menuIcon{
+#menuIcon {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-details{
+details {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,37 +114,38 @@ details[open] .up_icon {
 }
 
 /* ドロップダウンレイアウト */
-.dropdown_lists{
+.dropdown_lists {
     font-size: 1.5rem;
     text-align: center;
     margin-top: 45px;
     width: 20%;
     right: 0px;
     position: absolute;
-    border: 1px solid #052c65;
+    border: 1px solid #006;
     background-color: #fff;
 }
 
-
-.dropdown_lists li a{
+.dropdown_lists li a {
     color: #727272;
     width: 100%;
     display: inline-block;
     padding: 30px;
-    border-bottom: 1px solid #052c65;
+    border-bottom: 1px solid #006;
 }
 
-.dropdown_lists a:hover{
-    background-color: #052c65;
-        color: #fff;
+.dropdown_lists a:hover {
+    background-color: #006;
+    color: #fff;
 
 }
 
-/* main content */
+
+
+
+/* ↓↓↓main content共通部分↓↓↓ */
 #row {
     display: flex;
     flex-flow: row wrap;
-    /* justify-content: space-between; */
     width: 100%;
 }
 
@@ -149,9 +154,16 @@ details[open] .up_icon {
     padding: 0;
 }
 
+.validate_text {
+    color: #900;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    padding-left: 12px;
+    line-height: normal;
+}
 
 
-/* サイドバー　レイアウト */
+/* ↓↓↓サイドバー　レイアウト↓↓↓ */
 #side-bar {
     flex: 0 0 20%;
     border-left: 1px solid #727272;
@@ -166,53 +178,57 @@ details[open] .up_icon {
     font-size: 1.2rem;
 }
 
-/* ボタンのデザインリセット */
+/* サイドバーボタンレイアウト */
 button {
-display: block;
+    display: block;
     margin: 30px auto 0 auto;
-text-align: right;
+    text-align: right;
 
 }
 
 button a {
-color: #fff;
-text-decoration: none;
+    color: #fff;
+    text-decoration: none;
 }
 
-.side_n{
+.side_count {
     display: flex;
     justify-content: space-between;
     width: 170px;
     margin-top: 30px;
 }
 
-.side_btn{
+.side_btn_follow {
     text-align: right;
 }
 
-.side_btn .btn{
+.side_btn_follow .btn {
     width: 160px;
 }
 
-.side_btn_s {
-text-align: center;
+.side_btn_search {
+    text-align: center;
 }
 
-.side_btn_s a {
-font-size: 1.2rem;
+.side_btn_search a {
+    font-size: 1.2rem;
 }
 
 
 
 
+/* ↓↓↓indexページ↓↓↓ */
 
-.content {
-    margin: 0 auto;
-    padding: 40px;
+/* 新規投稿全体 */
+#containerHead {
+    display: flex;
+    justify-content: left;
+    padding: 30px 80px;
+    border-bottom: 8px solid #dee2e6;
 }
 
-/* 編集モーダル */
 
+/* 投稿編集モーダル */
 .modal {
     display: none;
     height: 100vh;
@@ -240,7 +256,7 @@ font-size: 1.2rem;
     text-align: center;
 }
 
-.modal_post{
+.modal_post {
     width: 100%;
     height: 200px;
     resize: none;
@@ -299,23 +315,13 @@ font-size: 1.2rem;
     margin-left: 20px;
 }
 
-.btn_alert{
+.btn_alert {
     width: 110px;
 }
 
-.alert_buttons{
+.alert_buttons {
     text-align: right;
 }
-
-/* 新規投稿 */
-
-#containerHead {
-    display: flex;
-    justify-content: left;
-    padding: 30px 80px;
-    border-bottom: 8px solid #dee2e6;
-}
-
 
 /* 投稿ボタン */
 .btn-success {
@@ -332,20 +338,19 @@ font-size: 1.2rem;
     align-items: flex-end;
 }
 
-
 /* フォームレイアウト */
-
-
 .form_layout {
     width: 700px;
     height: 150px;
     border: none;
-    margin: auto 30px;
     resize: none;
 }
 
-/* 新規投稿のプレースホルダーテキスト */
+.new_post {
+    margin: auto 30px;
+}
 
+/* 新規投稿のプレースホルダーテキスト */
 .form_layout::placeholder {
     color: #adb5bd;
 }
@@ -361,13 +366,12 @@ font-size: 1.2rem;
     margin-right: 15px;
 }
 
-.form_btn{
+.form_btn {
     margin: 0px;
 }
 
 /* 投稿一覧 */
-
-.table_post{
+.table_post {
     display: flex;
 }
 
@@ -380,16 +384,16 @@ font-size: 1.2rem;
     margin-bottom: 10px;
 }
 
-.post_text{
+.post_text {
     font-size: 1rem;
 }
 
-.post_time{
+.post_time {
     margin: 0 0 0 auto;
     font-size: 0.8rem;
 }
 
-.table_btn{
+.table_btn {
     display: flex;
     justify-content: space-between;
     width: 74px;
@@ -410,7 +414,9 @@ font-size: 1.2rem;
 }
 
 
-/* フォロワー・フォローリスト */
+
+
+/* ↓↓↓フォロワー・フォローリスト↓↓↓ */
 #containerHead h3 {
     font-size: 1.5rem;
     margin-right: 30px;
@@ -418,8 +424,7 @@ font-size: 1.2rem;
 
 .follower_head {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
 }
 
 .follower_head p {
@@ -427,8 +432,9 @@ font-size: 1.2rem;
 }
 
 
-/* 検索ぺーじ */
 
+
+/* ↓↓↓検索ぺーじ↓↓↓ */
 #containerSearch {
     display: flex;
     justify-content: left;
@@ -437,7 +443,8 @@ font-size: 1.2rem;
     align-items: center;
 }
 
-#containerSearch form{
+/* 検索フォーム */
+#containerSearch form {
     margin-left: 30px;
 }
 
@@ -464,17 +471,18 @@ font-size: 1.2rem;
     border-radius: 5px;
 }
 
-.table button{
+.table button {
     margin: 0;
 }
 
-.table_search td{
-    vertical-align:middle;
+.table_search td {
+    vertical-align: middle;
 }
 
 
-/* 自分以外のプロフィール */
 
+
+/* ↓↓↓自分以外のプロフィール↓↓↓ */
 .profile_left {
     display: flex;
 }
@@ -491,7 +499,7 @@ font-size: 1.2rem;
     font-size: 1.2rem;
 }
 
-.profile_list :first-child{
+.profile_list :first-child {
     width: 80px;
 }
 
@@ -499,50 +507,55 @@ font-size: 1.2rem;
     margin: 0 0 0 auto;
 }
 
-.profile_other #containerHead{
+.profile_other #containerHead {
     justify-content: space-between;
     height: 140px;
 }
 
-/* 自分のプロフィール */
 
-.profile{
+
+
+/* ↓↓↓自分のプロフィール↓↓↓ */
+.profile {
     display: flex;
     justify-content: space-between;
     width: 700px;
     margin: 50px auto;
 }
 
-.label{
+/* 編集フォーム */
+.label {
     font-size: 1.2rem;
     width: 300px;
 }
 
-.pro_form{
+.profile_form {
     display: flex;
     width: 600px;
     margin-bottom: 40px;
     align-items: center;
 }
 
-.pro_form .form-control {
+.profile_form .form-control {
     border-radius: 0px;
     border-color: #727272;
     background-color: #e9ecef;
+    width: 400px;
 }
 
-.pro_form .file {
+/* 画像アップロード */
+.profile_form .file {
     display: none;
 }
 
-.pro_form .pro_file{
+.profile_form .profile_file {
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.pro_file p{
+.profile_file p {
     display: inline-block;
     color: #adb5bd;
     cursor: pointer;
@@ -551,11 +564,11 @@ font-size: 1.2rem;
     font-size: 1.2rem;
 }
 
-
-.pro_btn{
+/* 更新ボタン */
+.profile_btn {
     text-align: center;
 }
 
-.pro_btn .btn{
+.profile_btn .btn {
     width: 140px;
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ProRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Post;
 use App\User;
 use App\Follow;
@@ -33,6 +33,9 @@ class UsersController extends Controller
         $this->middleware('auth');
     }
 
+
+
+
     // プロフィールページへ
     public function profile(Request $request){
         $user = Auth::user();
@@ -50,43 +53,44 @@ class UsersController extends Controller
         return view('/users/profile',['user'=>$user,'users'=>$users,'posts'=>$posts,'following_count'=>$following_count,'followed_count'=>$followed_count,]);
     }
 
+
+
     // プロフィール編集
-    public function profileUpdate(ProRequest $request)
+    public function profileUpdate(ProfileRequest $request)
     {
         $user = Auth::user();
-
         $update = [
-        'username' => $request->input('username'),
-        'mail' => $request->input('mail'),
-        'bio' => $request->input('bio'),
-    ];
+            'username' => $request->input('username'),
+            'mail' => $request->input('mail'),
+            'bio' => $request->input('bio'),
+        ];
 
-    // パスワードが入力された場合のみ更新
-    // filled() 指定したキーの有無 && 値が入力されているか、キーが存在しており、かつ値が入力されていたらtrue。
-    if ($request->filled('password')) {
-       // $update配列に'password'というキーに対して、バリデーションを実装
-        // $変数[''] = ;←連想配列における要素の追加や更新を 行うためのコード
-        $update['password'] = bcrypt($request->input('password'));
+        // パスワードが入力された場合のみ更新
+        // filled() 指定したキーの有無 && 値が入力されているか、キーが存在しており、かつ値が入力されていたらtrue。
+        if ($request->filled('password')) {
+            // $変数[''] = ;←連想配列における要素の追加や更新を 行うためのコード
+            $update['password'] = bcrypt($request->input('password'));
+        }
+
+        // 画像が入力された場合のみ更新
+        // file()メソッドでファイルを取得し、値があれば処理を実行する
+        if ($request->file('image')) {
+            // $変数[''] = ;←連想配列における要素の追加や更新を 行うためのコード
+            $file = $request->file('image')->getClientOriginalName();
+            $file_name = $request->file('image')->storeAs('',$file,'public');
+            $update['image'] = $file_name;
+        }
+
+        // まとめてupdate関数
+        $user->update($update);
+
+        return redirect('posts/index');
     }
 
-    // 画像が入力された場合のみ更新
-    // filled() 指定したキーの有無 && 値が入力されているか、キーが存在しており、かつ値が入力されていたらtrue。
-    if ($request->filled('image')) {
-       // $update配列に'images'というキーに対して、バリデーションを実装
-        // $変数[''] = ;←連想配列における要素の追加や更新を 行うためのコード
-        $file = $request->file('image')->store('public')->getClientOriginalName();
-        $path = Storage::url($file); // 画像のパスを生成
-        $update['images'] = $path;
-    }
-
-    // まとめてupdate関数
-    $user->update($update);
-
-    return redirect('posts/index');
-    }
 
 
-    // フォロー
+
+    // プロフィールページのフォロー
     public function follow(Request $request,$followed_id) {
         $user = Auth::user();
         $users = User::get();
@@ -97,22 +101,23 @@ class UsersController extends Controller
             'followed_id' => $followed_id,
             // ↑上記２つを使ってインスタンスを生成
         ]);
-
-        // return view('/users/profile',['user'=>$user,'users'=>$users]);
         return back();
     }
 
-    // フォロー解除
+
+
+    // プロフィールページのフォロー解除
     public function unfollow(Request $request,$followed_id) {
         // 削除するユーザーのidを取得
         $follow = Follow::where('following_id', \Auth::user()->id)->where('followed_id', $followed_id)->first();
         $follow->delete();
-
         $user = Auth::user();
         $users = User::get();
-        // return view('/users/profile',['user'=>$user,'users'=>$users]);
         return back();
     }
+
+
+
 
     // 検索機能の実行
     public function search(Request $request){
@@ -125,24 +130,17 @@ class UsersController extends Controller
 
         // 検索フォームで入力された値を取得する
         $keyword = $request->input('users');
-        // dump($keyword);
 
         // データベースに問い合わせ
-            if (!empty($keyword)) {
-                // dd($keyword);
+        if (!empty($keyword)) {
             $query = User::query();
             $query->where('username', 'LIKE', "%{$keyword}%");
             $users = $query->get();
             return view('/users/search',['users'=>$users,'user'=>$user,'keyword'=>$keyword,'following_count'=>$following_count,'followed_count'=>$followed_count]);
-            }
-            else{
+        }else{
                 $users = User::get();
-          return view('/users/search',['users'=>$users,'user'=>$user,'keyword'=>$keyword,'following_count'=>$following_count,'followed_count'=>$followed_count]
-          );
-        }
+                return view('/users/search',['users'=>$users,'user'=>$user,'keyword'=>$keyword,'following_count'=>$following_count,'followed_count'=>$followed_count]
+        );}
     }
-
-
-
 
 }

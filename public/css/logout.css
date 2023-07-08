@@ -1,37 +1,38 @@
 @charset "UTF-8";
 
+/* 共通パーツ */
+
 html {
     font-size: 16px;
-    color: #ffffff;
     height: 100%;
 }
 
 body {
+    color: #fff;
     height: 100%;
     font-size: 1rem;
     font-family: "YuGothic", Yu Gothic, sans-serif;
-    background: linear-gradient(180deg, #186AC9, #ffc107);
+    background: linear-gradient(180deg, #186AC9, #ff0);
     background-attachment: fixed
 }
 
-.logout-h {
+.logout_header {
     margin-top: 200px;
     text-align: center;
 }
 
-.logout-h img {
+.logout_header img {
     width: 150px;
     top: 200px;
 }
 
-.logout-h p {
+.logout_header p {
     font-size: 2rem;
     margin-top: 10px;
     font-weight: bold;
-    color: #ffffff;
 }
 
-.logout-c {
+.main_logout {
     margin: 30px auto;
     padding: 30px;
     border-radius: 20px;
@@ -39,65 +40,70 @@ body {
     width: 340px;
 }
 
-/* AtlasSNSへようこそ */
-.h2 {
-    font-size: 1.2rem;
-    text-align: center;
-    color: #ffffff;
-}
-
-.logout-f {
+/* フォームエリア共通 */
+#containerLogout {
     display: block;
     margin: 30px auto;
     width: 250px;
 }
 
-.logout-input {
+.logout_input {
     margin: 15px auto;
 }
 
 label {
     display: block;
     font-size: 0.8rem;
-    color: #ffffff;
 }
 
 .input {
     display: block;
     margin-top: 5px;
     width: 100%;
-    /* height: 30px; */
     border-radius: 7px;
     border: none;
     padding: 5px;
 }
 
-/* ログインボタン右寄せ */
-.submit-d {
+.validate_text{
+    color: #fff;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    line-height: normal;
+}
+
+/* AtlasSNSへようこそ */
+.h2 {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #fff;
+}
+
+/* ボタン右寄せ */
+.btn_submit {
     text-align: right;
 }
 
-.submit-d .btn {
+.btn_submit .btn {
     letter-spacing: 2px;
 }
 
-
-.new {
+/* ボタン下テキストリンク */
+.logout_p {
     text-align: center;
 
 }
 
-.new a {
-    color: #ffffff;
-
+.logout_p a {
+    color: #fff;
 }
 
-/* ログイン成功 */
-.clear-p {
+
+/* ログイン成功後ページ add*/
+.clear_p {
     text-align: center;
     line-height: normal;
     margin-top: 30px;
-    color: #ffffff;
     font-size: 1.1rem;
 }
 
@@ -105,18 +111,10 @@ label {
     font-weight: bold;
     text-align: center;
     margin-top: 15px;
-    color: #ffffff;
     font-size: 1rem;
 }
 
-.submit-p {
+.submit_p {
     text-align: center;
     margin-top: 15px;
-}
-
-.submit-c {
-    display: inline-block;
-    color: #ffffff;
-    font-size: 1rem;
-    border: none;
 }

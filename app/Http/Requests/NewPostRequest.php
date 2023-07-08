@@ -30,9 +30,9 @@ class NewPostRequest extends FormRequest
 
     public function messages()
     {
-  return [
-    'newPost.required' => '必須項目です',
-    'newPost.between' => '1文字以上,150文字以内で入力してください',
-  ];
-}
+        return [
+            'newPost.required' => '必須項目です',
+            'newPost.between' => '1文字以上,150文字以内で入力してください',
+        ];
+    }
 }

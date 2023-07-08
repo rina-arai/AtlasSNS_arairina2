@@ -36,9 +36,11 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // guestルートがlogoutの場合を除いて、常にミドルウェアを使用
         $this->middleware('guest')->except('logout');
     }
 
+    // ログインメソッド
     public function login(Request $request){
         if($request->isMethod('post')){
 
@@ -52,9 +54,9 @@ class LoginController extends Controller
         return view("auth.login");
     }
 
-    // ログアウト機能メソッド
+    // ログアウトメソッド　loggedOut 関数
     protected function loggedOut(Request $request) {
-      return redirect('login');
+        return redirect('login');
     }
 
 }

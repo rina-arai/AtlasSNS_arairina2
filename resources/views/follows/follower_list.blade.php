@@ -9,7 +9,9 @@
             <h3>Follower List</h3>
             <div class="list-group list-group-flush follower_head">
                 @foreach ($users as $user)
-                <p><a href="/users/{{ $user->id }}/profile"><img src="{{ $user->images }}" class="icon" alt="ユーザーアイコン"></a></p>
+                <p><a href="/users/{{ $user->id }}/profile">
+                    <img src="{{ asset('storage/'.$user->image) }}" class="icon" alt="ユーザーアイコン">
+                </a></p>
                 @endforeach
             </div>
         </div>
@@ -21,7 +23,9 @@
             @foreach ($posts as $post)
             <li class="list-group-item">
                 <div class="table_post">
-                   <p><a href="/users/{{ $post->user->id }}/profile"><img src="{{ $post->user->images }}" class="icon" alt="ユーザーアイコン"></a></p>
+                    <p><a href="/users/{{ $post->user->id }}/profile">
+                        <img src="{{ asset('storage/'.$post->user->image) }}" class="icon" alt="ユーザーアイコン">
+                    </a></p>
                    <div class="table_posts">
                    <p class="post_name">{{ $post->user->username }}</p>
                    <p class="post_text">{{ $post->post }}</p>

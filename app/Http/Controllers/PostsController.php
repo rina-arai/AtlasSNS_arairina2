@@ -17,6 +17,9 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
 
+
+
+    // indexページ表示
     public function index(){
         $user = Auth::user();
         // $following_idは配列の形でないと、$postsでwhereInが使えない
@@ -26,7 +29,6 @@ class PostsController extends Controller
         // user_id=$following_idのpostsテーブルの値を取得して新しい順に並べる
         // Where句に複数の値を指定したい(whereIn),getメソッドを使うと対象になった複数のデータを取得
         $posts = Post::whereIn('user_id', $following_id)->latest()->get();
-        // dump($posts);
         // フォロー数
         $following_count = $user->follows()->pluck('following_id');
         // フォロワー数
@@ -36,36 +38,38 @@ class PostsController extends Controller
 
 
 
+
+
     // 投稿内容の登録処理！！！
     public function create(NewPostRequest $request)
     {
         $post = $request->input('newPost');
-        // $post->user_id = auth()->user()->id;
         Post::create(['post' => $post,'user_id' => auth()->user()->id]);
         return redirect('posts/index');
     }
 
+
+
+
     // 投稿内容の編集処理！！！
     public function update(Request $request)
-{
-    $post = Post::find($request->id);
-    $post->update([
-        "post" => $request->post,
-    ]);
-
-    return redirect("posts/index");
-}
-
-// 投稿内容の削除処理！！！要確認\DB::table
-public function delete(Request $request)
     {
-        // dd(123);
         $post = Post::find($request->id);
-        // \DB::table('posts')
-        // ->where('id', $id)
+        $post->update([
+            "post" => $request->post,
+        ]);
+        return redirect("posts/index");
+    }
+
+
+
+
+    // 投稿内容の削除処理！！！
+    public function delete(Request $request)
+    {
+        $post = Post::find($request->id);
         $post->delete(["post" => $request->post,]);
         return redirect("posts/index");
-
     }
 
 }

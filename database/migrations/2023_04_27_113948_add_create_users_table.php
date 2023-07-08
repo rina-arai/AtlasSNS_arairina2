@@ -13,9 +13,13 @@ class AddCreateUsersTable extends Migration
      */
     public function up()
     {
+
         Schema::table('users', function (Blueprint $table) {
     $table->string('images')->default('Atlas.png')->change();
 });
+Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('images', 'image');//<-記述
+        });
 
     }
 
@@ -27,7 +31,11 @@ class AddCreateUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->string('images')->default('/storage/Atlas.png')->change();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('image', 'images');
         });
     }
 }

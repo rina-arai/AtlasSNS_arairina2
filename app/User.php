@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        'username', 'mail', 'password', 'images', 'bio'
+        'username', 'mail', 'password', 'image', 'bio'
     ];
 
     /**
@@ -36,10 +36,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
-// 第一引数には使用するモデル
-// 第二引数には使用するテーブル名
-// 第三引数にはリレーションを定義しているモデルの外部キー名(取得したい情報)自分のid
-// 第四引数には結合するモデルの外部キー名(あまりもの)
+    // 第一引数には使用するモデル
+    // 第二引数には使用するテーブル名
+    // 第三引数にはリレーションを定義しているモデルの外部キー名(取得したい情報)自分のid
+    // 第四引数には結合するモデルの外部キー名(あまりもの)
     // フォロワー→フォロー(自分のことをフォローしているユーザーを探す)
     public function followUsers()
     {
