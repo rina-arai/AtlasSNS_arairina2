@@ -65,8 +65,9 @@ class PostsController extends Controller
         ];
 
         $this->validate($request, $rules, $messages);
+
         $post->update([
-            "post" => $validatedData['post']
+            "post" => $request->post
         ]);
         return redirect("posts/index");
     }
