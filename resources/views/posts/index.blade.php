@@ -73,13 +73,15 @@
                                     <form action="/posts/update" method="post">
                                         @method('PUT')
                                         {{ csrf_field() }}
+                                        <textarea name="post" class="modal_post"></textarea>
+                                        <div class="validate_text">
                                         <!-- エラーメッセージ -->
                                         @if ($errors->has('post'))
                                             @foreach ($errors->get('post') as $message)
                                                 {{ $message }}<br>
                                             @endforeach
                                         @endif
-                                        <textarea name="post" class="modal_post"></textarea>
+                                        </div>
                                         <input type="hidden" name="id" class="modal_id" value="投稿id">
                                         <input type="image" src="/images/edit.png" class="edit">
                                         {{ csrf_field() }}

@@ -31,7 +31,7 @@
     <header>
         <div id="head">
             <!-- ロゴ -->
-            <h1><a href="http://127.0.0.1:8000/posts/index"><img src="/images/atlas.png" alt="atlas"></a></h1>
+            <h1><a href="/posts/index"><img src="/images/atlas.png" alt="atlas"></a></h1>
             <!-- ドロップダウンナビ -->
             <nav id="menu">
                 <details>
