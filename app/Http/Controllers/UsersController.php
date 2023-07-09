@@ -46,10 +46,10 @@ class UsersController extends Controller
 
         // 対象ユーザーのidを取得
         $users = User::find($request->id);
-        // 対象ユーザーの投稿を取得 whereIn句は複数のデータを取得
-        // Postモデルのデータベースの中で、user_idカラムが、$usersになっているデータを更新時間順に全て取得。
-        // これを、変数$postsの中に格納する
-        $posts = Post::whereIn('user_id', $users)->latest()->get();
+        // 対象ユーザーをwhere句で特定
+        // Postモデルのデータベースの中で、user_idカラムが、$users->idになっているデータを、getメソッドで更新時間順に全て取得。
+        // $usersだけだと、id絡む以外のカラムに同じ数字が入っていた場合取得されてしまうので、$users->idとする。
+        $posts = Post::where('user_id', $users->id)->latest()->get();
         return view('/users/profile',['user'=>$user,'users'=>$users,'posts'=>$posts,'following_count'=>$following_count,'followed_count'=>$followed_count,]);
     }
 

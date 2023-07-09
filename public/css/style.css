@@ -269,6 +269,11 @@ button a {
     margin-top: 15px;
 }
 
+.js-modal .validate_text{
+    text-align: left;
+    padding: 0;
+}
+
 
 /* 削除ボタン */
 .btn_trash {

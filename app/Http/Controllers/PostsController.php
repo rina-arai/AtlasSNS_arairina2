@@ -55,46 +55,21 @@ class PostsController extends Controller
     public function update(Request $request)
     {
         $post = Post::find($request->id);
-        // バリデーションルール定義
-        $rules = [
-            'post' => 'required|string|between:1,150',
-        ];
 
-        $messages = [
+        // バリデーションルール定義
+        $rules =['post' => 'required|string|between:1,150',];
+        // エラー時メッセージ
+        $messages =[
             'post.required' => '必須項目です',
             'post.between' => '1文字以上、150文字以内で入力してください',
         ];
-        // 引数の値がバリデートされればリダイレクト、されなければ引き続き処理の実行
-        // バリデーションの実行
-    // バリデーションの実行
-    $validatedData = $request->validate($rules, $messages);
 
-    if ($request->filled('post')) {
-        // バリデーションが成功した場合の処理
+        $this->validate($request, $rules, $messages);
         $post->update([
             "post" => $validatedData['post']
         ]);
         return redirect("posts/index");
-    } else {
-        // バリデーションに失敗した場合の処理
-        return redirect()->back()->withErrors(['post' => '投稿内容が必要です'])->withInput();
     }
-
-    }
-        // $request->validate([
-        //     'post' => 'required|string|between:1,150',
-        // ],[
-        //     'post.required' => '必須項目です',
-        //     'post.between' => '1文字以上,150文字以内で入力してください',
-        // ]);
-        // $post->update([
-        //     "post" => $request->post,
-        // ]);
-        // return redirect("posts/index");
-
-
-
-
 
     // 投稿内容の削除処理！！！
     public function delete(Request $request)
